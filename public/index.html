@@ -7,5 +7,34 @@
 </head>
 <body>
   <h1>Hello Express + Static HTML/CSS!</h1>
+
+  <div>
+    <input type="text" id="input1" placeholder="Enter first value">
+    <input type="text" id="input2" placeholder="Enter second value">
+    <button onclick="callApi()">Submit</button>
+  </div>
+
+  <div id="result" style="margin-top: 20px;"></div>
+
+  <script>
+    async function callApi() {
+      const input1 = document.getElementById('input1').value;
+      const input2 = document.getElementById('input2').value;
+	
+      try {
+        const response = await fetch(`/tambah?num1=${input1}&num2=${input2}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+        document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error: ' + error.message;
+      }
+    }
+  </script>
 </body>
 </html>
