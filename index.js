@@ -7,6 +7,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(express.json());
 
+// anggaplah db
 const chatRooms = {
 	general: [],
 	tech: [],
@@ -20,13 +21,21 @@ app.get('/chat/:room', (req, res) => {
 
 // Post a new message to a room
 app.post('/chat/:room', (req, res) => {
-	const room = req.params.room;
+	const room = req.params.room; 
+	// general
+
 	const { name, message } = req.body;
+	// user3, test 2
 
 	if (!chatRooms[room]) return res.status(404).json({ error: 'Room not found' });
-
 	const newMessage = { name, message, time: new Date().toISOString() };
+	//  newMessage = {name : "user3", "message": "test 2", "time": '2025-05-20T10:27:24.828Z'}
+
+	// chatRooms.general.push()
 	chatRooms[room].push(newMessage);
+
+	console.log(chatRooms)
+
 	res.json({ success: true });
 });
 
