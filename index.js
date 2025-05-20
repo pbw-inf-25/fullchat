@@ -29,8 +29,7 @@ app.post('/chat/:room', (req, res) => {
 
 	if (!chatRooms[room]) return res.status(404).json({ error: 'Room not found' });
 	const newMessage = { name, message, time: new Date().toISOString() };
-	//  newMessage = {name : "user3", "message": "test 2", "time": '2025-05-20T10:27:24.828Z'}
-
+	// newMessage = {name : "user3", "message": "test 2", "time": '2025-05-20T10:27:24.828Z'}
 	// chatRooms.general.push()
 	chatRooms[room].push(newMessage);
 
